@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080e1c">
+  <meta name="description" content="Kepler Vision — explore Kepler light curves with AstroLens transit screening.">
+  <title>Kepler Vision — Explore the signal</title>
+  <link rel="icon" href="/assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css?v=3"><script defer src="/app.js?v=6"></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#overview" data-nav="overview"><img src="/assets/mark.svg" alt="" width="34" height="34"><span>Kepler <b>Vision</b></span></a>
+    <nav id="main-nav" aria-label="Main navigation">
+      <a href="#overview" class="nav-link active" data-nav="overview">Overview</a><a href="#analyze" class="nav-link" data-nav="analyze">Analyze</a><a href="#science" class="nav-link" data-nav="science">The science</a><a href="#data" class="nav-link" data-nav="data">Data sources</a><a href="#model" class="nav-link" data-nav="model">AstroLens model</a>
+    </nav>
+    <div class="api-state"><i id="api-dot"></i><span id="api-label">Checking API</span></div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+  </header>
+  <main>
+    <section class="page active" id="page-overview" data-page="overview">
+      <div class="hero shell">
+        <div class="hero-copy"><div class="eyebrow"><i></i> Kepler mission <span>·</span> Transit screening</div>
+          <h1>Find the quiet<br><em>dips in starlight.</em></h1>
+          <p>A clear workspace for exploring Kepler light curves. AstroLens looks for subtle brightness changes that can reveal a planet crossing its star.</p>
+          <div class="hero-actions"><a href="#analyze" class="button primary" data-nav="analyze">Open analysis workspace <b>↗</b></a><a href="#science" class="button quiet" data-nav="science">How it works <b>→</b></a></div>
+          <div class="trust"><span>✦</span> Research prototype <i>/</i> Transparent evaluation</div>
+        </div>
+        <div class="hero-art"><img src="/assets/orbit-hero.svg" alt="A planet crossing in front of a glowing star"></div>
+      </div>
+      <div class="shell stats"><div><b>3,197</b><span>flux samples per curve</span></div><i></i><div><b>1D CNN</b><span>AstroLens model</span></div><i></i><div><b>Kepler</b><span>mission light curves</span></div><i></i><div><b class="amber">Prototype</b><span>review every candidate</span></div></div>
+      <div class="shell section"><div class="section-head"><div><small>A CLEAR PATH FROM CURVE TO CANDIDATE</small><h2>One workspace. The context to use it.</h2></div><p>Explore the signal, understand the model, and keep the limits of the data in view.</p></div>
+        <div class="cards">
+          <a href="#analyze" class="card" data-nav="analyze"><span class="card-icon aqua">↗</span><small>01 · ANALYZE</small><b>Screen a light curve</b><p>Upload a Kepler CSV and inspect its predictions and probabilities.</p><strong>Explore workspace →</strong></a>
+          <a href="#science" class="card" data-nav="science"><span class="card-icon violet">◌</span><small>02 · LEARN</small><b>See the transit signal</b><p>A visual guide to the dip in brightness and how the model processes it.</p><strong>Read the science →</strong></a>
+          <a href="#data" class="card" data-nav="data"><span class="card-icon gold">⌁</span><small>03 · TRACE</small><b>Follow the data</b><p>See what is in the CSVs and where broader mission data comes from.</p><strong>View data sources →</strong></a>
+        </div>
+      </div>
+      <div class="shell notice"><b>!</b><p><strong>Screening aid, not a discovery claim.</strong> The included test split has only five planet examples. Read the model card before interpreting scores.</p><a href="#model" class="link-button" data-nav="model">Open model card →</a></div>
+    </section>
+
+    <section class="page shell" id="page-analyze" data-page="analyze">
+      <div class="page-head"><div class="eyebrow"><i></i> Kepler mission <span>·</span> Analysis workspace</div><h1>Analyze <em>light curves.</em></h1><p>Upload a Kepler CSV with 3,197 flux columns. AstroLens screens each curve through the local prediction API.</p></div>
+      <div class="workspace-grid"><section class="panel upload-panel"><div class="panel-heading"><div><small>WORKSPACE / 01</small><h2>Load observations</h2></div><span class="pill">CSV · KEPLER FORMAT</span></div>
+          <label class="drop-zone" id="drop-zone" for="csv-file"><input id="csv-file" type="file" accept=".csv,text/csv" hidden><span class="upload-icon">↑</span><b id="upload-title">Drop a CSV file here</b><span id="upload-hint">or <u>browse your files</u></span><small>LABEL is optional · exoTrain / exoTest format</small></label>
+          <div class="file-summary hidden" id="file-summary"><span class="file-type">CSV</span><div><b id="file-name"></b><small id="file-size"></small></div><button id="remove-file" aria-label="Remove file">×</button></div>
+          <div class="action-row"><button class="button primary" id="analyze-button" disabled>Screen light curves <b>→</b></button><span id="analysis-status">Select a file to begin.</span></div>
+          <div class="progress hidden" id="progress-wrap"><div><span id="progress-label">Preparing file…</span><span id="progress-percent">0%</span></div><i><b id="progress-fill"></b></i></div><div class="error hidden" id="analysis-error"></div>
+        </section>
+        <aside class="panel guide"><small>INPUT GUIDE</small><h3>What your file needs</h3><div class="guide-row"><i>✓</i><div><b>3,197 flux columns</b><span>FLUX.1 through FLUX.3197, in order.</span></div></div><div class="guide-row"><i>○</i><div><b>LABEL is optional</b><span>Add labels to compare model results.</span></div></div><div class="guide-row"><i>○</i><div><b>One curve per row</b><span>Numeric values only.</span></div></div><hr><div class="guide-status"><i></i><span id="workspace-api">Connecting to local API…</span></div><span class="guide-foot">Model: AstroLens multi-scale CNN</span></aside>
+      </div>
+      <section class="results hidden" id="results-section"><div class="results-title"><div><small>WORKSPACE / 02</small><h2>Screening results</h2><p>Model flags are a starting point for review, not a confirmation.</p></div><button class="button secondary" id="download-button">Download CSV ↓</button></div>
+        <div class="result-metrics" id="results-metrics"></div><div class="scorecard hidden" id="scorecard"></div>
+        <div class="result-grid"><div class="panel"><div class="panel-heading"><div><small>MODEL OUTPUT</small><h3>Planet probability</h3></div><span class="legend"><i></i> Planet flag</span></div><canvas id="probability-chart" height="250"></canvas><div class="chart-foot"><span>Light curve row</span><span>Threshold · 50%</span></div></div>
+          <div class="panel"><small>SIGNAL INSPECTOR</small><h3>Inspect a curve</h3><label class="select-label" for="curve-select">Choose a light curve</label><select id="curve-select" class="select"></select><canvas id="curve-chart" height="220"></canvas><div id="curve-detail" class="curve-detail">Select a curve to inspect its signal.</div></div></div>
+        <div class="panel table-panel"><div class="panel-heading"><div><small>ALL PREDICTIONS</small><h3>Candidate review</h3></div><label class="filter"><input type="checkbox" id="candidate-filter"> Planet flags only</label></div><div class="table-wrap"><table><thead><tr><th>ROW</th><th>MODEL FLAG</th><th>PLANET PROBABILITY</th><th>CONFIDENCE</th><th>KNOWN LABEL</th></tr></thead><tbody id="results-body"></tbody></table></div></div>
+      </section>
+    </section>
+
+    <section class="page shell" id="page-science" data-page="science">
+      <div class="page-head"><div class="eyebrow"><i></i> The science <span>·</span> Transit method</div><h1>A planet can reveal itself<br><em>by taking a little light.</em></h1><p>Kepler watched stars for repeated dips in brightness. A transit is one possible explanation; follow-up and scientific vetting are still needed.</p></div>
+      <div class="panel science-feature"><div><small>THE SIGNAL</small><h2>A small shadow.<br>A measured change.</h2><p>When a planet passes in front of its star from our viewpoint, it blocks a small fraction of the starlight. A telescope records brightness over time as a light curve. Repeated dips at regular intervals are a useful clue.</p><div class="fact-row"><div><b>Depth</b><span>How far brightness falls</span></div><div><b>Duration</b><span>How long a dip lasts</span></div><div><b>Period</b><span>Time between transits</span></div></div></div><img src="/assets/transit-diagram.svg" alt="Diagram showing a planet transit and the corresponding dip in a light curve"></div>
+      <div class="section"><div class="section-head"><div><small>FROM TELESCOPE SIGNAL TO MODEL OUTPUT</small><h2>How Kepler Vision processes a curve</h2></div><p>Each stage should be inspectable and reproducible.</p></div><div class="process-grid"><article><i>01</i><b>Input</b><p>3,197 ordered flux measurements describe one light curve from the labeled Kepler data.</p></article><article><i>02</i><b>Scale</b><p>A scaler learned from training data puts cadence features on a comparable scale.</p></article><article><i>03</i><b>Screen</b><p>AstroLens uses parallel 1D convolutions to examine patterns at different widths.</p></article><article><i>04</i><b>Review</b><p>The model returns a probability. A flag is a candidate for inspection, not confirmation.</p></article></div></div>
+      <div class="notice"><b>i</b><p><strong>A transit-like dip is not proof of a planet.</strong> Instrument effects and other astrophysical sources can produce similar signals. Kepler Vision is a learning and engineering prototype, not expert vetting.</p><a href="#model" class="link-button" data-nav="model">Read model card →</a></div>
+    </section>
+
+    <section class="page shell" id="page-data" data-page="data">
+      <div class="page-head"><div class="eyebrow"><i></i> Data provenance <span>·</span> Sources and format</div><h1>Know where the<br><em>signal comes from.</em></h1><p>Kepler Vision keeps the source dataset visible, describes its limits, and points to the mission archives behind the field.</p></div>
+      <div class="panel source-feature"><div><small>CURRENT PROJECT DATASET</small><h2>Kepler-labelled time series</h2><p>The included <code>exoTrain.csv</code> and <code>exoTest.csv</code> contain 3,197 flux samples per row. Source labels 1 = no planet and 2 = confirmed planet; AstroLens maps them to 0 and 1.</p><div class="source-stats"><span>5,087 train rows</span><span>570 test rows</span><span>37 / 5 planet examples</span></div></div><img src="/assets/data-orbit.svg" alt="Decorative illustration of a star system"></div>
+      <div class="source-grid"><article class="panel source-card"><small>SOURCE DATASET</small><h3>Kaggle · Kepler labelled time series</h3><p>The dataset used by the research notebook. Useful for reproducing the experiment, but it contains very few positive examples.</p><a href="https://www.kaggle.com/datasets/keplersmachines/kepler-labelled-time-series-data" target="_blank" rel="noopener">Open Kaggle dataset ↗</a></article>
+        <article class="panel source-card"><small>MISSION ARCHIVE</small><h3>MAST · Kepler observations</h3><p>NASA’s archive provides Kepler light curves, target pixel files, documentation, and retrieval tools.</p><a href="https://archive.stsci.edu/missions-and-data/kepler" target="_blank" rel="noopener">Explore Kepler at MAST ↗</a></article>
+        <article class="panel source-card"><small>CATALOG & VETTING</small><h3>NASA Exoplanet Archive · KOI</h3><p>Read object dispositions and release guidance. Pick a specific uniformly vetted release for statistical work.</p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html" target="_blank" rel="noopener">Read KOI guidance ↗</a></article></div>
+      <div class="caution"><b>!</b><div><strong>Small test set</strong><p>The held-out file contains only five planet examples. A single miss moves measured recall by 20 percentage points. These files are suitable for a reproducible starter project, not a strong scientific performance claim.</p></div></div>
+      <div class="panel schema"><small>FILE SCHEMA</small><h3>What the CSV contains</h3><div><code>LABEL</code><span>Optional at inference · 1 = no planet, 2 = planet</span></div><div><code>FLUX.1 … FLUX.3197</code><span>Ordered numeric flux measurements</span></div></div>
+    </section>
+
+    <section class="page shell" id="page-model" data-page="model">
+      <div class="page-head"><div class="eyebrow"><i></i> Model card <span>·</span> AstroLens</div><h1>Meet <em>AstroLens.</em></h1><p>The transit-screening model inside Kepler Vision. What it does, how it was trained, and what the current evaluation can—and cannot—tell us.</p></div>
+      <div class="model-banner"><div class="model-orb">A<span>✦</span></div><div><small>KEPLER VISION MODEL / 01</small><h2>AstroLens Multi-Scale CNN</h2><p>1D convolutional network · 4 kernel widths · binary screening output</p></div><span class="pill warning-pill">EXPERIMENTAL</span></div>
+      <div class="model-stats"><div><span>Accuracy</span><b>98.95%</b><small>565 / 570 were no-planet</small></div><div><span>Planet recall</span><b class="amber">20%</b><small>1 detected out of 5</small></div><div><span>Planet precision</span><b>33.3%</b><small>1 correct of 3 flags</small></div><div><span>Average precision</span><b>0.225</b><small>tiny held-out split</small></div></div>
+      <div class="model-grid"><article class="panel"><small>ARCHITECTURE</small><h3>Multiple scales, one curve</h3><p>Parallel 1D convolution branches use kernel widths 3, 5, 11, and 21. Their outputs are concatenated, pooled, then passed through a dense layer and sigmoid probability output.</p><div class="kernels"><i>k=3</i><i>k=5</i><i>k=11</i><i>k=21</i><b>→ Planet probability</b></div></article><article class="panel"><small>TRAINING SETUP</small><h3>Imbalance-aware training</h3><p>Training data has 37 planet examples and 5,050 no-planet examples. AstroLens scales using training data and oversamples the minority class in training only.</p><div class="balance"><span>No planet <i><b style="width:100%"></b></i><em>5,050</em></span><span>Planet <i><b class="planet-bar" style="width:2%"></b></i><em>37</em></span></div></article></div>
+      <div class="caution"><b>!</b><div><strong>Do not use accuracy alone.</strong><p>With five planets in the test split, recall moves in 20-point jumps. AstroLens currently misses four of them. This is a baseline, not a production-ready detector.</p></div></div>
+      <div class="artifact-row"><div><b>Model artifact</b><code>models/multiscale_cnn.keras</code></div><div><b>Scaler artifact</b><code>models/multiscale_cnn.scaler.joblib</code></div><div><b>Threshold</b><span>0.50 · baseline</span></div></div>
+    </section>
+  </main>
+  <footer class="footer shell"><a class="brand" href="#overview" data-nav="overview"><img src="/assets/mark.svg" width="28" height="28" alt=""><span>Kepler <b>Vision</b></span></a><span>Explore the signal with context.</span><a href="#data" class="link-button" data-nav="data">Data provenance →</a></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>

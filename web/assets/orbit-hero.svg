@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" fill="none">
+ <defs>
+  <radialGradient id="neb" cx="0" cy="0" r="1" gradientTransform="matrix(290 50 -45 260 386 270)" gradientUnits="userSpaceOnUse"><stop stop-color="#29466d" stop-opacity=".58"/><stop offset="1" stop-color="#10182c" stop-opacity="0"/></radialGradient>
+  <radialGradient id="star" cx="0" cy="0" r="1" gradientTransform="matrix(0 98 -98 0 390 270)" gradientUnits="userSpaceOnUse"><stop stop-color="#fff9d8"/><stop offset=".23" stop-color="#ffeab0"/><stop offset=".58" stop-color="#ffa76f"/><stop offset="1" stop-color="#ed6b68" stop-opacity=".05"/></radialGradient>
+  <radialGradient id="planet" cx="0" cy="0" r="1" gradientTransform="matrix(-52 42 -44 -55 574 269)" gradientUnits="userSpaceOnUse"><stop stop-color="#8dded8"/><stop offset=".55" stop-color="#337c91"/><stop offset="1" stop-color="#14243f"/></radialGradient>
+  <filter id="blur" x="120" y="0" width="520" height="540" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="44"/></filter>
+ </defs>
+ <ellipse cx="386" cy="282" fill="url(#neb)" rx="300" ry="245"/>
+ <ellipse cx="390" cy="280" rx="262" ry="147" stroke="#9bc3ec" stroke-opacity=".23" transform="rotate(-20 390 280)"/>
+ <ellipse cx="390" cy="280" rx="210" ry="104" stroke="#81d4cf" stroke-opacity=".31" transform="rotate(14 390 280)"/>
+ <ellipse cx="390" cy="280" rx="284" ry="177" stroke="#bca9f2" stroke-opacity=".16" transform="rotate(39 390 280)"/>
+ <circle cx="390" cy="280" r="137" fill="#f99567" opacity=".14" filter="url(#blur)"/>
+ <circle cx="390" cy="280" r="91" fill="url(#star)"/>
+ <circle cx="390" cy="280" r="70" fill="#ffdea0" opacity=".22"/>
+ <path d="M300 278c37-8 142-8 180 0" stroke="#fff6d8" stroke-opacity=".65" stroke-width="1.5"/>
+ <circle cx="570" cy="269" r="31" fill="url(#planet)" stroke="#b4e9e1" stroke-opacity=".76"/>
+ <path d="M544 252c15-12 36-17 54-12" stroke="#c2f4e3" stroke-opacity=".5" stroke-width="3"/>
+ <path d="M264 408c70 49 195 68 301 37" stroke="#92b9e6" stroke-opacity=".28"/>
+ <circle cx="182" cy="139" r="2" fill="#eef5ff"/><circle cx="618" cy="149" r="1.7" fill="#d9e8ff"/><circle cx="617" cy="385" r="2.2" fill="#b9d7ff"/><circle cx="160" cy="352" r="1.5" fill="#f6dca6"/><circle cx="465" cy="95" r="1.4" fill="#fff"/><circle cx="251" cy="225" r="1.3" fill="#e3f1ff"/><circle cx="491" cy="451" r="1.5" fill="#e1eaff"/><circle cx="692" cy="276" r="1.5" fill="#fff"/>
+ <circle cx="390" cy="280" r="118" stroke="#ffcb8d" stroke-opacity=".17"/>
+ <text x="83" y="494" fill="#8faac4" font-family="monospace" font-size="10" letter-spacing="2">STELLAR FLUX / TIME SERIES</text>
+</svg>

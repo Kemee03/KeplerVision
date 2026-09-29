@@ -1,0 +1,57 @@
+{
+  "model_artifact": "models/multiscale_cnn.keras",
+  "evaluation_file": "data/exoTest.csv",
+  "evaluation_rows": 570,
+  "positive_evaluation_rows": 5,
+  "prediction_threshold": 0.5,
+  "accuracy": 0.9894736842105263,
+  "balanced_accuracy": 0.5982300884955752,
+  "average_precision": 0.2247875544129013,
+  "roc_auc": 0.6148672566371681,
+  "matthews_correlation_coefficient": 0.2531812852795551,
+  "planet_recall_wilson_95_ci": [
+    0.03622316096978745,
+    0.6244717358814613
+  ],
+  "confusion_matrix_labels_0_1": [
+    [
+      563,
+      2
+    ],
+    [
+      4,
+      1
+    ]
+  ],
+  "classification_report": {
+    "no_planet": {
+      "precision": 0.9929453262786596,
+      "recall": 0.9964601769911504,
+      "f1-score": 0.9946996466431095,
+      "support": 565.0
+    },
+    "planet": {
+      "precision": 0.3333333333333333,
+      "recall": 0.2,
+      "f1-score": 0.25,
+      "support": 5.0
+    },
+    "accuracy": 0.9894736842105263,
+    "macro avg": {
+      "precision": 0.6631393298059964,
+      "recall": 0.5982300884955752,
+      "f1-score": 0.6223498233215548,
+      "support": 570.0
+    },
+    "weighted avg": {
+      "precision": 0.9871592561651039,
+      "recall": 0.9894736842105263,
+      "f1-score": 0.9881671936023806,
+      "support": 570.0
+    }
+  },
+  "evaluation_warnings": [
+    "Only 5 planet examples are in this evaluation file; planet recall has high uncertainty and should not be treated as a reliable estimate."
+  ],
+  "mlflow_run_id": "fbfdf9ffab954f41bdd66eefe86b7d9a"
+}

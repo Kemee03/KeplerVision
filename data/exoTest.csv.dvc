@@ -1,0 +1,5 @@
+outs:
+- md5: d5c9921bc71f3800fabd2d5599ce7da7
+  size: 28907068
+  hash: md5
+  path: exoTest.csv
